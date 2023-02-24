@@ -21,22 +21,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
     export default{
         name: 'the-footer',
-        data(){
-            return{
-                tabItem3: './public/tab-item3.svg',
-                footerNavItems: [
-                    {id: 1, icon: './public/tab-item1.svg'},
-                    {id: 2, icon: './public/tab-item2.svg', subtract: './public/subtract.svg'},
-                ]
-            }
-        },
-        props: {
-            mainPage: {
-                type: Boolean,
-                required: true,
-            }
+        computed: {
+            ...mapState({
+                footerNavItems: state => state.footerNavItems,
+                mainPage: state => state.mainPage,
+                tabItem3: state => state.tabItem3,
+            })
         }
     }    
 </script>

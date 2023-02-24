@@ -3,13 +3,13 @@
         <nav class="search__nav nav-search">
             <ul class="nav-search__list">
                 <li>
-                    <img :src="topMenuItems[0].icon">             
+                    <img :src="topMenuItemBackIcon">             
                 </li>
                 <li>
-                    {{ topMenuItems[1].value }} 
+                    {{ topMenuItemValue }} 
                 </li>
                 <li>
-                    <img :src="topMenuItems[2].icon">         
+                    <img :src="topMenuItemMenuIcon">         
                 </li>
             </ul>
         </nav>
@@ -26,15 +26,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
     export default{
         name: 'the-search',
-        searcher: '<img src="./public/search.svg">Search for a city or airport',
-        query: '',
-        topMenuItems: [
-            { icon: './public/top-left-item.svg' },
-            { value: 'Weather' },
-            { icon: './public/top-right-item.svg' },
-        ]
+        computed: {
+            ...mapState({
+                topMenuItemBackIcon: state => state.topMenuItemBackIcon,
+                topMenuItemValue: state => state.topMenuItemValue,
+                topMenuItemMenuIcon: state => state.topMenuItemMenuIcon,
+                searcher: state => state.searcher,
+                query: state => state.query,
+            })
+        }
     }
 </script>
 

@@ -32,11 +32,14 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
     export default{
         name: 'main-screen',
-        data: () => ({
-            mainPage: false,
-        })
+        computed:{
+            ...mapState({
+                mainPage: state => state.mainPage,
+            })
+        }
     }
 </script>
 

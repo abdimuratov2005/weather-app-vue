@@ -41,10 +41,10 @@
         name: 'the-mainContent',
         computed:{
             ...mapState({
-                homebg: state => state.mainContent.homebg,
-                air: state => state.mainContent.air,
-                imgList: state => state.mainContent.imgList,
-                mainWeatherHourlys: state => state.mainContent.mainWeatherHourlys,
+                homebg: state => state.homebg,
+                air: state => state.air,
+                imgList: state => state.imgList,
+                mainWeatherHourlys: state => state.mainWeatherHourlys,
             })
         }
     }

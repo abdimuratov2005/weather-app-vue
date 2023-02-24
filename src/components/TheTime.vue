@@ -7,11 +7,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
     export default {
         name: 'the-time',
-        data: () => ({
-            hours: new Date().getHours(),
-            minutes: new Date().getMinutes(),
-        }),
+        computed : {
+            ...mapState({
+                hours: state => state.hours,
+                minutes: state => state.minutes,
+            })
+        }
     }
 </script>

@@ -3,6 +3,7 @@
         <div class="sidebar__container">
 
             <the-time></the-time>
+            {{ counter }}
 
             <nav class="sidebar__nav nav">
                 <ul class="nav__list">
@@ -11,6 +12,7 @@
                         :key="item.id" 
                         class="nav__item"
                     >
+                    
                         <img :src="item.icon" alt="icon">
                     </li>
                 </ul>
@@ -20,14 +22,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
     export default {
         name: 'the-sidebar',
-        data : () => ({
-            sidebar: [
-                {id: 1, icon: './public/Mobile Signal.svg'},
-                {id: 2, icon: './public/Wifi.svg'},
-                {id: 3, icon: './public/Battery.svg'}
-            ],
-        })
+        computed:{
+            ...mapState({
+                sidebar: state => state.sidebar,
+                counter: state => state.counter,
+            })
+        }
+        
     }
 </script>
