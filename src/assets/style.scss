@@ -70,7 +70,6 @@ body {
     &__container {
         display: flex;
         flex-direction: column;
-        overflow: hidden;
         position: relative;
     }
     &__house {
@@ -79,9 +78,8 @@ body {
     &__weather {
         display: flex;
         z-index: 2;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 0px 10px;
+        // overflow-y: auto;
+        // overflow-x: hidden;
         max-height: 325px;
         position: relative;
         flex-direction: column;
@@ -116,7 +114,7 @@ body {
         display: flex;
         padding: 32px 0px;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 18px;
         margin: 0px 5px;
         align-items: center;
         flex-direction: column;
@@ -142,7 +140,7 @@ body {
         backdrop-filter: blur(25px);
         width: 100%;
         position: relative;
-        top: -287px;
+        top: -265px;
         z-index: 5;
         &-list {
             display: flex;

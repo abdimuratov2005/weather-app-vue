@@ -1,12 +1,17 @@
 <template>
     <div class="menu">
-        <the-search></the-search>
+        <the-search @changeUIMenu="changeUI"></the-search>
     </div>
 </template>
 
 <script>
 export default{
-    name: 'the-menu'
+    name: 'the-menu',
+    methods: {
+        changeUI(){
+            this.$emit('changeUI',)
+        },
+    }
 }
 
 </script>

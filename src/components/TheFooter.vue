@@ -11,7 +11,7 @@
                         <img :src="footerNavItem.icon" >
                     </li>
                     <li 
-                        @click="mainPage == false">
+                        @click="changeUI">
                        <img :src="tabItem3"> 
                     </li>
                 </ul>
@@ -24,12 +24,22 @@
 import { mapState } from 'vuex';
     export default{
         name: 'the-footer',
+        // props: {
+        //     mainPage: {
+        //         type: Boolean,
+        //         required: true
+        //     }
+        // },
         computed: {
             ...mapState({
                 footerNavItems: state => state.footerNavItems,
-                mainPage: state => state.mainPage,
                 tabItem3: state => state.tabItem3,
-            })
+            }),
+        },
+        methods: {
+            changeUI(){
+                this.$emit('changeUI')
+            },
         }
     }    
 </script>
