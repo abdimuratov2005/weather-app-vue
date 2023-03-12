@@ -24,12 +24,6 @@
 import { mapState } from 'vuex';
     export default{
         name: 'the-footer',
-        // props: {
-        //     mainPage: {
-        //         type: Boolean,
-        //         required: true
-        //     }
-        // },
         computed: {
             ...mapState({
                 footerNavItems: state => state.footerNavItems,

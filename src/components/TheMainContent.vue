@@ -10,8 +10,8 @@
         </div>
         <div class="mainWeather__block">
             <div class="mainWeather__hourly">
-                <div class="mainWeather-items" v-for="forecasts in forecast.list" :key="forecasts.id">
-                    {{ forecasts.dt_txt.trim().split([','], [5]).join() }}
+                <div class="mainWeather-items" v-for="forecasts in $store.getters.getCountryNukus.list" :key="forecasts.id">
+                    <div class="mainWeather__time">{{ forecasts.dt_txt.slice(11, 16) }}</div> <!--   2023-03-12 00:00:00  -->
                     {{ Math.round(forecasts.main.temp)}}°
                     <img :src="mainWeatherHourlys[2].weatherIcon">
                 </div>
@@ -34,31 +34,18 @@
 
 <script>
     import { mapState } from 'vuex';
-    import axios from 'axios';
     export default{
         name: 'the-mainContent',
-        data(){
-            return{
-                forecast: {}
-            }
-        },
         computed:{
-            // comp() {
-            //     console.log()
-            // },
             ...mapState({
                 homebg: state => state.homebg,
                 air: state => state.air,
                 imgList: state => state.imgList,
-                mainUrl: state => state.mainUrl,
-                apiKey: state => state.apiKey,
-                mainWeatherHourlys: state => state.mainWeatherHourlys
-            })
+                mainWeatherHourlys: state => state.mainWeatherHourlys,
+            }),
         },
         mounted() {
-            axios.get(`${this.mainUrl}forecast?q=Nukus&units=metric&APPID=${this.apiKey}`)
-                .then(response => this.forecast = response.data)
-                .catch(err => alert(err))
+            this.$store.dispatch('fetchNukus')
         },
     }
 </script>
@@ -82,9 +69,6 @@
         &::-webkit-scrollbar {
             width: 0;
         }
-    }
-    .mainWeather-items{
-        
     }
     .detail-imglist{
         display: grid;

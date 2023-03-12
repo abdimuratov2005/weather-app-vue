@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-
+import axios from "axios";
 const options = {
     month: 'long',
     day: 'numeric',
@@ -19,6 +19,8 @@ export default createStore({
         searcher: 'Search for a city or airport',
         topMenuItemBackIcon: './public/top-left-item.svg',
         topMenuItemValue: 'Weather',
+        forecast: {},
+        // query: '',
         topMenuItemMenuIcon: './public/top-right-item.svg',
         footerNavItems: [
             { id: 1, icon: './public/tab-item1.svg' },
@@ -49,49 +51,39 @@ export default createStore({
         ],
     },
     getters: {
-
+        getCountryNukus(state) {
+            return state.forecast
+        },
+        getSearchCounty(state) {
+            return state.weather
+        }
     },
     mutations: {
         changeUI(state) {
             return state.mainPage = !false
-        }
-        // SET_Searching(state, searchValue) {
-        //     state.query = searchValue
-        // },
-        // UPDATE_Weather(state, { current }) {
-        //     Vue.set(state, 'weather', current)
-        // },
-        // FILE_Error(state) {
-        //     Vue.set(state, 'weather', {})
-        // },
-        // SET_Weather(state, weather) {
-        //     state.weather = weather
-        // },
+        },
+        setNukus(state, payload) {
+            state.forecast = payload
+        },
+        setSearch(state, payload) {
+            state.weather = payload
+        },
     },
     actions: {
-        // async fetchWeather({ commit }, searchValue) {
-        //     commit('SET_Searching');
-
-        //     let current = null
-        //     if (searchValue.key != '') {
+        fetchNukus(context) {
+            axios.get(`${this.state.mainUrl}forecast?q=Nukus&units=metric&APPID=${this.state.apiKey}`)
+                .then(response => context.commit('setNukus', response.data))
+                .catch(err => alert(err))
+        },
+        // fetchSearch(context) {
+        //     // if (this.state.query.length > 0) {
         //         try {
-        //             const currentWeather = await axios.get()
-        //             current = (currentWeather.data != '') ? currentWeather.data : null
+        //             fetch(`${this.state.mainUrl}weather?q=${this.state.query}&units=metric&APPID=${this.state.apiKey}`)
+        //                 .then(response => context.commit('setSearch', response.data))
         //         } catch (e) {
-        //             current = null
-        //             alert("Ошибка!")
+        //             alert(e, 'Error on Server or Not Found')
         //         }
-        //     }
-        //     commit('UPDATE_Weather', { current })
-        // }
-        // loadWeather() {
-        //     axios
-        //         .get(`${state.mainUrl}weather?q=${state.query}&units=metric&APPID=${state.apiKey}`, {})
-        //         .then(response => response.state.result.data)
-        //         .then(weather => {
-        //             console.log(weather);
-        //         })
+        //     // }
         // },
-
     },
 })

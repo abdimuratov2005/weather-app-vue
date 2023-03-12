@@ -1,3 +1,4 @@
+@import 'https://cdn.jsdelivr.net/gh/mailtoharshit/San-Francisco-Font-/sanfrancisco.css';
 @import 'reset';
 .main {
     display: flex;
@@ -112,9 +113,9 @@ body {
     &-items {
         width: 65px;
         display: flex;
-        padding: 32px 0px;
+        padding: 25px 0px;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 16px;
         margin: 0px 5px;
         align-items: center;
         flex-direction: column;
@@ -125,8 +126,12 @@ body {
         img {
             width: 32px;
             height: 32px;
-            margin: 8px 0px;
+            margin: 8px 0 0;
         }
+    }
+    &__time{
+        margin: 0px 0px 5px 0px;
+        
     }
 }
 

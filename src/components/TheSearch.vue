@@ -20,8 +20,10 @@
                 :placeholder="searcher"
                 class="search__form"
                 v-model="query"
-                @keypress="fetchWeather"
+                @keypress="fetchWeather" 
             >
+            <!--   :modelValue="query"
+                @update:modelValue="setQuery"  -->
         </form>
         <Transition>
             <div class="results" v-if="typeof weather.main != 'undefined'">
@@ -51,47 +53,51 @@
 </template>
 
 <script>
-import { mapState} from 'vuex';
+import {  mapState } from 'vuex';
     
     export default{
         name: 'the-search',
-        data(){
-            return{
-                query: '',
-                weather: {},
-            }
-        },
+        data: () => ({
+            query: '',
+            weather: {},
+        }),
         computed: {
             ...mapState({
+                // query: state => state.query,
                 topMenuItemBackIcon: state => state.topMenuItemBackIcon,
                 topMenuItemValue: state => state.topMenuItemValue,
                 topMenuItemMenuIcon: state => state.topMenuItemMenuIcon,
-                searcher: state => state.searcher,
                 mainUrl: state => state.mainUrl,
+                searcher: state => state.searcher,
                 apiKey: state => state.apiKey,
                 mainWeatherHourlys: state => state.mainWeatherHourlys,
-            }),  
+                // weather: state => state.weather,
+            }),
         },
-
         methods: {
             fetchWeather(e){
-                if( this.query.length > 1 && e.key == "Enter"){
-                    try{
-                        fetch(`${this.mainUrl}weather?q=${this.query}&units=metric&APPID=${this.apiKey}`)
-                            .then(response => response.json())
-                            .then(this.setResult);
-                            }
-                        catch (e){
-                            alert(e, 'Error on Server or Not Found')
-                        }
+                if (this.query.length > 0 && e.key == 'Enter') {
+                    try {
+                    fetch(`${this.mainUrl}weather?q=${this.query}&units=metric&APPID=${this.apiKey}`)
+                        .then(response => response.json())
+                        .then(this.result)
+                    } catch (e) {
+                        alert(e, 'Error on Server or Not Found')
+                    }
                 }
             },
-            setResult(results){
-                 this.weather = results
+            result( res){
+                this.weather = res
             },
+            // ...mapMutations({
+            //     setQuery: 'setQuery'
+            // }),
             changeUIMenu(){
                 this.$emit('changeUIMenu')
             },
+            // fetchWeather(e){
+            //     this.$store.dispatch('fetchSearch')
+            // },
         },
     }
     // 
