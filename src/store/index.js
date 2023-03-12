@@ -15,7 +15,7 @@ export default createStore({
         hours: new Date().getHours(),
         minutes: new Date().getMinutes(),
         mainUrl: 'https://api.openweathermap.org/data/2.5/',
-        apiKey: 'b86a789a30353383595b706caf74de53',
+        apiKey: 'YOUR_API_KEY',
         searcher: 'Search for a city or airport',
         topMenuItemBackIcon: './public/top-left-item.svg',
         topMenuItemValue: 'Weather',
